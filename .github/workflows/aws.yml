@@ -33,12 +33,12 @@ on:
 
 env:
   AWS_REGION: ap-northeast-2                   # set this to your preferred AWS region, e.g. us-west-1
-  ECR_REPOSITORY: DevOps01-P2-TeamC           # set this to your Amazon ECR repository name
-  ECS_SERVICE: P2-TeamC-ECS                # set this to your Amazon ECS service name
-  ECS_CLUSTER: P2-TeamC-ECS-CLUSTER                 # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: P2-TeamC-ECS-TASK-DEFINITION # set this to the path to your Amazon ECS task definition
+  ECR_REPOSITORY: devops01-p2-teamc           # set this to your Amazon ECR repository name
+  ECS_SERVICE: p2-teamc-ecs                # set this to your Amazon ECS service name
+  ECS_CLUSTER: p2-teamc-ecs-cluster                 # set this to your Amazon ECS cluster name
+  ECS_TASK_DEFINITION: p2-teamc-ecs-task-definition # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: P2-TeamC-CONTAINER         # set this to the name of the container in the
+  CONTAINER_NAME: p2-teamc-container         # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
 
 jobs:

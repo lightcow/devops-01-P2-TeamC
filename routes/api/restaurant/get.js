@@ -1,12 +1,12 @@
 //const { readAll } = require("../../model")
 
   
-const { readAll } = require("../../../model/restaurant.js")
+const { readAll, readOne } = require("../../../model/restaurant.js")
 
 module.exports = async function (app, opts) {
   app.get('/', async function (request, reply) {
   
-    const result = await readAll(this.mongo) 
+    const result = await readOne(this.mongo,'62468cd41b73a31ef45a9118') 
 
     if(!result){
       reply

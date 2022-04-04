@@ -1,17 +1,25 @@
-const { readAll } = require("../../model")
+//const { readAll } = require("../../model")
 
   
-module.exports = async function (fastify, opts) {
-  fastify.get('/', async function (request, reply) {
-    // const result = await readAll(this.mongo)
-       
-    reply
-      .code(200)
-      .header('Content-Type', 'application/json; charset=utf-8')
-      .send({message: "VALID"})
-    })
+const { readAll } = require("../../../model/restaurant.js")
+
+module.exports = async function (app, opts) {
+  app.get('/', async function (request, reply) {
+  
+    const result = await readAll(this.mongo) 
+
+    if(!result){
+      reply
+      .code(404) 
+      .header('content-type', 'application/json')
+      .send({error : "not "})
+    }else{
+      reply
+        .code(200) 
+        .header('content-type', 'application/json')
+        .send(result) 
+    }
+  })
 }
-  
-
 
 

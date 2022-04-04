@@ -1,5 +1,5 @@
 const { ObjectId } = require('fastify-mongodb')
-COLLECTION = restaurants
+COLLECTION = 'restaurants'
 module.exports = {
   readAll: async (mongo) => {
     const collection = mongo.db.collection(COLLECTION)

@@ -7,7 +7,8 @@ module.exports = async function (fastify, opts) {
   // Place here your custom code!
   fastify.register(require('fastify-mongodb'), {
     forceClose: true,
-    url: 'mongodb://root:example@mongo-nlb-927409d5ce0ac71f.elb.ap-northeast-2.amazonaws.com:27017/baedal?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false'
+    url: 'mongodb://root:example@mongo-nlb-b84189a7fbb46ab6.elb.ap-northeast-2.amazonaws.com:27017/baedal?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false'
+
 })
   // Do not touch the following lines
 

@@ -92,28 +92,29 @@
 
 const { ObjectId } = require('fastify-mongodb')
 const { Addrestaurants, createOne } = require('../../../model/add_menu.js')
+//model 폴더의 add.menu.js 내용을 갖고옴.
 
-module.exports = async function (app, opts) {
-  app.post('/', async function (request, reply) {
-    const tmpId = '624b7fad532f4695fe317913'
-    const curBody = await Addrestaurants(this.mongo, tmpId)
+module.exports = async function (fastify, opts) {
+  fastify.post('/', async function (request, reply) {
+    const restaurantID = '6246652af383e19ce033c502'
+    const reqBody = await Addrestaurants(this.mongo, restaurantID)
     
     request.body._id = ObjectId()
-    const newBody = { ...curBody, menu : [ ...curBody.menu, request.body ]}
+    const newBody = { ...reqBody, menu : [ ...reqBody.menu, request.body ]}
 
-    const result = await createOne(this.mongo, tmpId, newBody)
-    const newRes = await Addrestaurants(this.mongo, tmpId)
+    const result = await createOne(this.mongo, restaurantID, newBody)
+    const newRes = await Addrestaurants(this.mongo, restaurantID)
 
     if(!result){
         reply
-        .code(404) //상태코드 보내는 메소드
+        .code(404) 
         .header('content-type', 'application/json')
-        .send({error : "Not Found"}) //데이터베이스에서 꺼내와야 함
+        .send({error : "No Body"}) 
     }else{
         reply
-        .code(200) //상태코드 보내는 메소드
+        .code(200) 
         .header('content-type', 'application/json')
-        .send(newRes) //데이터베이스에서 꺼내와야 함
+        .send(newRes) 
     }
   })
 }

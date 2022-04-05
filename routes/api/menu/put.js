@@ -5,21 +5,29 @@ module.exports = async function (fastify, opts) {
     fastify.put('/:id', async function (request, reply) {
       const restaurant = await readOne(this.mongo, '62468697e4f358304b6ec31d')
       
-      console.log("=====read the restaurant=====\n", restaurant.menu)
-      const updateMenu = restaurant.menu.filter(item => item._id == request.params.id)
-      console.log("=====read the restaurant=====\n", updateMenu)
-      console.log("=====read the restaurant=====\n", request.body)
-
-      // const result = await updateOne(this.mongo, request.params._id, request.body) 
-      // reply
-      //   .code(200) 
-      //   .header('content-type', 'application/json')
-      //   .send({
-      //     "_id": result._id,
-      //     "name": result.name,
-      //     "price": result.price
-      //   }) 
-      return 'hello world'
+      let newMenu;
+      let oldMenu=[];
+      for(let i = 0; i < restaurant.menu.length; i++){
+        if (restaurant.menu[i]._id.toString() === request.params.id){
+          newMenu = { ...restaurant.menu[i], name: request.body.name, price: request.body.price};
+          // console.log("=====newMenu=====\n", newMenu)
+        }
+        else{
+          oldMenu.push({...restaurant.menu[i]})
+          // console.log("=====oldMenu=====\n", oldMenu)
+        }
+      }
+      let wholeMenu = oldMenu;
+      wholeMenu.push(newMenu);
+      
+      let newRestaurant= {menu: wholeMenu}
+      const result = await updateOne(this.mongo, '62468697e4f358304b6ec31d', newRestaurant)
+      const modifiedRestaurant = await readOne(this.mongo, '62468697e4f358304b6ec31d')
+      
+      reply
+        .code(200)
+        .header('content-type', 'application/json')
+        .send(modifiedRestaurant.menu.find(item => item._id == request.params.id))
     })
   }
   
